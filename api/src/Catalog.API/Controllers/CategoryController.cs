@@ -55,7 +55,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _categoryRepository.Delete(id);
-            return Ok();
+            return Ok("Category deleted");
         }
     }
 }

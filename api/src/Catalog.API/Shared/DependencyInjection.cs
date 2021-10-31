@@ -12,6 +12,7 @@ namespace Catalog.API.Shared
             service.AddScoped<IProdructRepository, ProductRepository>();
 
             service.AddScoped<ICategoryService, CategoryService>();
+            service.AddScoped<IProductService, ProductService>();
         }
     }
 }

@@ -60,7 +60,6 @@ namespace Catalog.Tests.UnitTests.Services
         }
     }
 
-
     public class AddCategoryWhenNameIsAlreadyInUseTests : CategoryServiceTests
     {
         private IResult result;
@@ -76,6 +75,63 @@ namespace Catalog.Tests.UnitTests.Services
                 .ReturnsAsync(() => categories);
 
             result = await CategoryService.Add(category);
+        }
+
+        [Test]
+        public void Should_Return_The_Expected_Result()
+        {
+            var expectedResult = new Result("The category name is already in use", false);
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+    }
+
+    public class UpdateCategoryTests : CategoryServiceTests
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var category = CategoryFaker.Generate();
+
+            CategoryRepositoryMock.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Category, bool>>>())).ReturnsAsync(() => new List<Category>());
+
+            result = await CategoryService.Update(category);
+        }
+
+        [Test]
+        public void Should_Call_Method_Get() =>
+            CategoryRepositoryMock.Verify(x => x.Get(
+                It.IsAny<Expression<Func<Category, bool>>>()), Times.Once);
+
+        [Test]
+        public void Should_Call_Method_Update() =>
+            CategoryRepositoryMock.Verify(x => x.Update(It.IsAny<Category>()), Times.Once);
+
+        [Test]
+        public void Should_Return_The_Expected_Result()
+        {
+            var expectedResult = new Result("Category updated", true);
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+    }
+
+    public class UpdateCategoryWhenNameIsAlreadyInUseTests : CategoryServiceTests
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var category = CategoryFaker.Generate();
+            var categories = CategoryFaker.Generate(2);
+
+            CategoryRepositoryMock.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Category, bool>>>()))
+                .ReturnsAsync(() => categories);
+
+            result = await CategoryService.Update(category);
         }
 
         [Test]
