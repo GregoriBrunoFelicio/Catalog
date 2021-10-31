@@ -15,17 +15,13 @@ namespace Catalog.Tests.UnitTests.Services
 {
     public abstract class CategoryServiceTests
     {
-        protected AutoFaker<Category> CategoryFaker;
-        protected Mock<ICategoryRepository> CategoryRepositoryMock;
-        protected CategoryService CategoryService;
+        protected AutoFaker<Category> CategoryFaker = new();
+        protected Mock<ICategoryRepository> CategoryRepositoryMock = new();
+        protected ICategoryService CategoryService;
 
         [OneTimeSetUp]
-        public void SetUp()
-        {
-            CategoryFaker = new AutoFaker<Category>();
-            CategoryRepositoryMock = new Mock<ICategoryRepository>();
+        public void SetUp() =>
             CategoryService = new CategoryService(CategoryRepositoryMock.Object);
-        }
     }
 
     public class AddCategoryTests : CategoryServiceTests

@@ -11,9 +11,9 @@ namespace Catalog.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
-        private readonly IProdructRepository _prodructRepository;
+        private readonly IProductRepository _prodructRepository;
 
-        public ProductController(IProductService productService, IProdructRepository prodructRepository)
+        public ProductController(IProductService productService, IProductRepository prodructRepository)
         {
             _productService = productService;
             _prodructRepository = prodructRepository;

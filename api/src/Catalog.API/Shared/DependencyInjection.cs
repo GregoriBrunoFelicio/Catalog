@@ -9,7 +9,7 @@ namespace Catalog.API.Shared
         public static void AddServices(this IServiceCollection service)
         {
             service.AddScoped<ICategoryRepository, CategoryRepository>();
-            service.AddScoped<IProdructRepository, ProductRepository>();
+            service.AddScoped<IProductRepository, ProductRepository>();
 
             service.AddScoped<ICategoryService, CategoryService>();
             service.AddScoped<IProductService, ProductService>();

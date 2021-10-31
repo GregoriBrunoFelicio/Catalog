@@ -15,9 +15,9 @@ namespace Catalog.API.Services
 
     public class ProductService : IProductService
     {
-        private readonly IProdructRepository _prodructRepository;
+        private readonly IProductRepository _prodructRepository;
 
-        public ProductService(IProdructRepository prodructRepository) =>
+        public ProductService(IProductRepository prodructRepository) =>
             _prodructRepository = prodructRepository;
 
         public async Task<IResult> Add(Product product)
