@@ -21,7 +21,7 @@ namespace Catalog.API.Services
 
         public async Task<IResult> Add(Category category)
         {
-            if (!await IsNameAvaliable(category.Name))
+            if (!await IsNameAvailable(category.Name))
                 return new Result("The category name is already in use", false);
 
             await _categoryRepository.Add(category);
@@ -31,7 +31,7 @@ namespace Catalog.API.Services
 
         public async Task<IResult> Update(Category category)
         {
-            if (!await IsNameAvaliable(category.Name))
+            if (!await IsNameAvailable(category.Name))
                 return new Result("The category name is already in use", false);
 
             await _categoryRepository.Update(category);
@@ -39,7 +39,7 @@ namespace Catalog.API.Services
             return new Result("Category updated", true);
         }
 
-        private async Task<bool> IsNameAvaliable(string categoryName) =>
+        private async Task<bool> IsNameAvailable(string categoryName) =>
             !(await _categoryRepository.Get(x => x.Name == categoryName)).Any();
     }
 }

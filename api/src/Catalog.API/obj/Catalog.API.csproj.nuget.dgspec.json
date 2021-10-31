@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\src\\Catalog.API\\Catalog.API.csproj": {}
+    "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\api\\src\\Catalog.API\\Catalog.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\src\\Catalog.API\\Catalog.API.csproj": {
+    "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\api\\src\\Catalog.API\\Catalog.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\src\\Catalog.API\\Catalog.API.csproj",
+        "projectUniqueName": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\api\\src\\Catalog.API\\Catalog.API.csproj",
         "projectName": "Catalog.API",
-        "projectPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\src\\Catalog.API\\Catalog.API.csproj",
+        "projectPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\api\\src\\Catalog.API\\Catalog.API.csproj",
         "packagesPath": "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\src\\Catalog.API\\obj\\",
+        "outputPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\api\\src\\Catalog.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\GregoriBrunoFelicio\\AppData\\Roaming\\NuGet\\NuGet.Config",

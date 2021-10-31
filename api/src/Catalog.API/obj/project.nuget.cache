@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "etoJgBqnuHMqdljj8HGCurXHfzjWgctdw8LPV/MpNhUn+tabMGQikl7B4lC4Hzpynzcn8Yn0zWx2kpFX3D6lxw==",
+  "dgSpecHash": "GslLyzQT2D3q2n3A0Hn9pYA7FiQH5zJR463ovuN8LBj0clw74ZnqgT6m307Al+3O+lXGJlRYlwTWWj5EIfhghA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\src\\Catalog.API\\Catalog.API.csproj",
+  "projectFilePath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Catalog\\api\\src\\Catalog.API\\Catalog.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

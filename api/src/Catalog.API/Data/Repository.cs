@@ -15,7 +15,6 @@ namespace Catalog.API.Data
         Task<T> Get(int id);
         Task<IEnumerable<T>> Get(Expression<Func<T, bool>> predicate);
         Task<IEnumerable<T>> GetAll();
-
     }
 
     public class Repository<T> : IRepository<T> where T : Entity
