@@ -1,7 +1,9 @@
 ﻿using Catalog.API.Data;
+using Catalog.API.Inputs;
 using Catalog.API.Models;
 using Catalog.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Catalog.API.Controllers
@@ -20,8 +22,14 @@ namespace Catalog.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Category category)
+        public async Task<IActionResult> Post([FromBody] CreateCategoryInput input)
         {
+            var category = new Category
+            {
+                Id = input.Id,
+                Name = input.Name
+            };
+
             var result = await _categoryService.Add(category);
             return result.Success
                 ? Ok(result.Message)
@@ -29,8 +37,14 @@ namespace Catalog.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] Category category)
+        public async Task<IActionResult> Put([FromBody] CreateCategoryInput input)
         {
+            var category = new Category
+            {
+                Id = input.Id,
+                Name = input.Name
+            };
+
             var result = await _categoryService.Update(category);
             return result.Success
                 ? Ok(result.Message)
@@ -44,15 +58,15 @@ namespace Catalog.API.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{id:Guid}")]
+        public async Task<IActionResult> Get(Guid id)
         {
             var category = await _categoryRepository.Get(id);
             return Ok(category);
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{id:Guid}")]
+        public async Task<IActionResult> Delete(Guid id)
         {
             await _categoryRepository.Delete(id);
             return Ok("Category deleted");

@@ -1,7 +1,9 @@
 ﻿using Catalog.API.Data;
+using Catalog.API.Inputs;
 using Catalog.API.Models;
 using Catalog.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Catalog.API.Controllers
@@ -20,8 +22,15 @@ namespace Catalog.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Product product)
+        public async Task<IActionResult> Post([FromBody] CreateProductInput input)
         {
+            var product = new Product
+            {
+                Id = input.Id,
+                Name = input.Name,
+                Price = input.Price
+            };
+
             var result = await _productService.Add(product);
             return result.Success
                 ? Ok(result.Message)
@@ -29,8 +38,15 @@ namespace Catalog.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] Product product)
+        public async Task<IActionResult> Put([FromBody] UpdateProductInput input)
         {
+            var product = new Product
+            {
+                Id = input.Id,
+                Name = input.Name,
+                Price = input.Price
+            };
+
             var result = await _productService.Update(product);
             return result.Success
                 ? Ok(result.Message)
@@ -44,15 +60,15 @@ namespace Catalog.API.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{id:Guid}")]
+        public async Task<IActionResult> Get(Guid id)
         {
             var product = await _prodructRepository.Get(id);
             return Ok(product);
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{id:Guid}")]
+        public async Task<IActionResult> Delete(Guid id)
         {
             await _prodructRepository.Delete(id);
             return Ok("Product deleted");

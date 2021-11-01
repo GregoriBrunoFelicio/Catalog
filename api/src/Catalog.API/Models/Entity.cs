@@ -1,7 +1,13 @@
-﻿namespace Catalog.API.Models
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+
+namespace Catalog.API.Models
 {
     public abstract class Entity
     {
-        public int Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.String)]
+        public Guid Id { get; set; }
     }
 }

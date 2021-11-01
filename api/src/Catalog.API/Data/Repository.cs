@@ -11,8 +11,8 @@ namespace Catalog.API.Data
     {
         Task Add(T obj);
         Task Update(T obj);
-        Task Delete(int id);
-        Task<T> Get(int id);
+        Task Delete(Guid id);
+        Task<T> Get(Guid id);
         Task<IEnumerable<T>> Get(Expression<Func<T, bool>> predicate);
         Task<IEnumerable<T>> GetAll();
     }
@@ -30,10 +30,10 @@ namespace Catalog.API.Data
         public async Task Update(T obj) =>
             await Collection.ReplaceOneAsync(o => o.Id == obj.Id, obj);
 
-        public async Task<T> Get(int id) =>
+        public async Task<T> Get(Guid id) =>
             await Collection.Find(entity => entity.Id == id).FirstOrDefaultAsync();
 
-        public async Task Delete(int id) => await Collection.DeleteOneAsync(x => x.Id == id);
+        public async Task Delete(Guid id) => await Collection.DeleteOneAsync(x => x.Id == id);
 
         public async Task<IEnumerable<T>> GetAll() =>
             await Collection.Find(_ => true).ToListAsync();

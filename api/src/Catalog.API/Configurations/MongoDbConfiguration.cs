@@ -8,7 +8,7 @@ namespace Catalog.API.Configurations
     {
         public static void AddMongoDbConfiguration(this IServiceCollection service, IConfiguration configuration)
         {
-            service.AddScoped<IMongoClient, MongoClient>(_ =>
+            service.AddSingleton<IMongoClient>(_ =>
             {
                 var settings = MongoClientSettings.FromConnectionString(configuration.GetConnectionString("NoSqlConnection"));
                 return new MongoClient(settings);
