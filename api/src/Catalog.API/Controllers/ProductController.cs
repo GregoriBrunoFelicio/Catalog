@@ -68,6 +68,13 @@ namespace Catalog.API.Controllers
             return Ok(product);
         }
 
+        [HttpGet("ByCategory/{id:Guid}")]
+        public async Task<IActionResult> GetByCategory(Guid id)
+        {
+            var products = await _prodructRepository.GetByCategory(id);
+            return Ok(products);
+        }
+
         [HttpDelete("{id:Guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
