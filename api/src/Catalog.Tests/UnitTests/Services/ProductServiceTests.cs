@@ -17,11 +17,12 @@ namespace Catalog.Tests.UnitTests.Services
     {
         protected AutoFaker<Product> ProductFaker = new();
         protected Mock<IProductRepository> ProductRepositoryMock = new();
+        protected Mock<ICategoryRepository> CategoryRepositoryMock = new();
         protected IProductService ProductService;
 
         [OneTimeSetUp]
         public void SetUp() =>
-            ProductService = new ProductService(ProductRepositoryMock.Object);
+            ProductService = new ProductService(ProductRepositoryMock.Object, CategoryRepositoryMock.Object);
     }
 
     public class AddProductTests : ProductServiceTests
@@ -35,6 +36,7 @@ namespace Catalog.Tests.UnitTests.Services
 
             ProductRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Product, bool>>>())).ReturnsAsync(() => new List<Product>());
+            CategoryRepositoryMock.Setup(x => x.Get(It.IsAny<Guid>())).ReturnsAsync(() => new Category());
 
             result = await ProductService.Add(product);
         }
@@ -81,6 +83,31 @@ namespace Catalog.Tests.UnitTests.Services
         }
     }
 
+    public class AddProductWhenCategoryIsNotFoundTests : ProductServiceTests
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var product = ProductFaker.Generate();
+
+            ProductRepositoryMock.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Product, bool>>>()))
+                .ReturnsAsync(() => new List<Product>());
+            CategoryRepositoryMock.Setup(x => x.Get(It.IsAny<Guid>())).ReturnsAsync(() => null);
+
+            result = await ProductService.Add(product);
+        }
+
+        [Test]
+        public void Should_Return_The_Expected_Result()
+        {
+            var expectedResult = new Result("Category not found", false);
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+    }
+
     public class UpdateProductTests : ProductServiceTests
     {
         private IResult result;
@@ -92,6 +119,7 @@ namespace Catalog.Tests.UnitTests.Services
 
             ProductRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Product, bool>>>())).ReturnsAsync(() => new List<Product>());
+            CategoryRepositoryMock.Setup(x => x.Get(It.IsAny<Guid>())).ReturnsAsync(() => new Category());
 
             result = await ProductService.Update(product);
         }
@@ -137,4 +165,30 @@ namespace Catalog.Tests.UnitTests.Services
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
+
+    public class UpdateProductWhenCategoryIsNotFoundTests : ProductServiceTests
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var product = ProductFaker.Generate();
+
+            ProductRepositoryMock.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Product, bool>>>()))
+                .ReturnsAsync(() => new List<Product>());
+            CategoryRepositoryMock.Setup(x => x.Get(It.IsAny<Guid>())).ReturnsAsync(() => null);
+
+            result = await ProductService.Update(product);
+        }
+
+        [Test]
+        public void Should_Return_The_Expected_Result()
+        {
+            var expectedResult = new Result("Category not found", false);
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+    }
+
 }

@@ -30,10 +30,14 @@ namespace Catalog.API.Data
         public async Task Update(T obj) =>
             await Collection.ReplaceOneAsync(o => o.Id == obj.Id, obj);
 
-        public async Task<T> Get(Guid id) =>
-            await Collection.Find(entity => entity.Id == id).FirstOrDefaultAsync();
+        public async Task<T> Get(Guid id)
+        {
+            var filter = Builders<T>.Filter.Eq(x => x.Id, id);
+            return await Collection.Find(filter).FirstOrDefaultAsync();
+        }
 
-        public async Task Delete(Guid id) => await Collection.DeleteOneAsync(x => x.Id == id);
+        public async Task Delete(Guid id) =>
+            await Collection.DeleteOneAsync(x => x.Id == id);
 
         public async Task<IEnumerable<T>> GetAll() =>
             await Collection.Find(_ => true).ToListAsync();

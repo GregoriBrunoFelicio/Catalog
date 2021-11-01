@@ -16,14 +16,26 @@ namespace Catalog.API.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _prodructRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public ProductService(IProductRepository prodructRepository) =>
+        public ProductService(IProductRepository prodructRepository,
+            ICategoryRepository categoryRepository)
+        {
             _prodructRepository = prodructRepository;
+            _categoryRepository = categoryRepository;
+        }
 
         public async Task<IResult> Add(Product product)
         {
             if (!await IsNameAvailable(product.Name))
                 return new Result("The product name is already in use", false);
+
+            var category = await _categoryRepository.Get(product.CategoryId);
+
+            if (category is null)
+                return new Result("Category not found", false);
+
+            product.Category = category;
 
             await _prodructRepository.Add(product);
 
@@ -34,6 +46,11 @@ namespace Catalog.API.Services
         {
             if (!await IsNameAvailable(product.Name))
                 return new Result("The product name is already in use", false);
+
+            var category = await _categoryRepository.Get(product.CategoryId);
+
+            if (category is null)
+                return new Result("Category not found", false);
 
             await _prodructRepository.Update(product);
 

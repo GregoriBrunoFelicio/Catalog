@@ -37,7 +37,7 @@ namespace Catalog.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] CreateCategoryInput input)
+        public async Task<IActionResult> Put([FromBody] UpdateCategoryInput input)
         {
             var category = new Category
             {

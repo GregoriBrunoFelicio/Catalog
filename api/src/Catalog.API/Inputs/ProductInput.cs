@@ -13,6 +13,9 @@ namespace Catalog.API.Inputs
 
         [Required(ErrorMessage = "The {0} is required.")]
         public decimal Price { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required.")]
+        public Guid CategoryId { get; set; }
     }
 
     public class UpdateProductInput
@@ -26,5 +29,8 @@ namespace Catalog.API.Inputs
 
         [Required(ErrorMessage = "The {0} is required.")]
         public decimal Price { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required.")]
+        public Guid CategoryId { get; set; }
     }
 }
