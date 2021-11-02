@@ -76,9 +76,9 @@ export class CreateCategoryComponent implements OnInit {
 
   delete(id: string) {
     this.categoryService.delete(id).subscribe(
-      () => {
+      (result: any) => {
         this.getCategories();
-        this.messageService.showSuccessMessage('Categoria excluida');
+        this.messageService.showSuccessMessage(result.message);
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);
