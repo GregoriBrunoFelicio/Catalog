@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateCategoryComponent } from '../category/create-category/create-category.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 
 @Component({
@@ -11,8 +12,15 @@ export class ProductComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
   ngOnInit(): void {}
+
   openCreateProductModal() {
     const modalRef = this.modalService.open(ProductCreateComponent, {
+      centered: true,
+    });
+  }
+
+  openCreateCategoryModal() {
+    const modalRef = this.modalService.open(CreateCategoryComponent, {
       centered: true,
     });
   }

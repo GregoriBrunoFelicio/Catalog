@@ -1,6 +1,9 @@
 <div class="col-12">
     <div class="modal-header">
         <h4 class="modal-title">Criar Produto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     <div class="modal-body">
         <form>
@@ -13,24 +16,16 @@
                 <input type="number" class="form-control" />
             </div>
             <div class="form-group">
-                <div class="row">
-                    <div class="col-6">
-                        <label>Categoria</label>
-                        <select class="form-control">
+                <label>Categoria</label>
+                <select class="form-control">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
                    </select>
-                    </div>
-                    <div class="col-6 text-left">
-                        <button type="submit" class="btn btn-primary add-category-button-margin">+</button>
-                    </div>
-                </div>
-
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
         </form>
     </div>
 </div>
