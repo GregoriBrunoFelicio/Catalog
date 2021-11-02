@@ -14,14 +14,15 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {}
 
   openCreateProductModal() {
-    const modalRef = this.modalService.open(ProductCreateComponent, {
+    this.modalService.open(ProductCreateComponent, {
       centered: true,
     });
   }
 
   openCreateCategoryModal() {
-    const modalRef = this.modalService.open(CreateCategoryComponent, {
+    this.modalService.open(CreateCategoryComponent, {
       centered: true,
+      scrollable: true,
     });
   }
 }
