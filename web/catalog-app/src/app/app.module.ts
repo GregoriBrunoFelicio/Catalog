@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,9 +8,9 @@ import { AppComponent } from './app.component';
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { HeaderComponent } from './header/header.component';
 import { ProductCreateComponent } from './product/product-create/product-create.component';
+import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductComponent } from './product/product.component';
-import { ProductDetailsComponent } from './product/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,13 @@ import { ProductDetailsComponent } from './product/product-details/product-detai
     CreateCategoryComponent,
     ProductDetailsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

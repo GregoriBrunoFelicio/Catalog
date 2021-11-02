@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/product/product';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 @Component({

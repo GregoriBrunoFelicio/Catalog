@@ -6,12 +6,8 @@
         </div>
         <div class="col-3">
             <label>Buscar por categoria</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+            <select class="form-control">
+        <option *ngFor="let category of categories$ | async">{{ category.name}}</option>
       </select>
         </div>
         <div class="col-6 text-right mt-4">

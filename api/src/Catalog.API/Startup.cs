@@ -30,6 +30,11 @@ namespace Catalog.API
                 app.UseSwaggerConfiguration();
             }
 
+            app.UseCors(x => x
+                         .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .SetIsOriginAllowed(_ => true));
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
