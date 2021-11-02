@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/product/product';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -9,28 +11,25 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  products: Product[] = [];
-  constructor(private modalService: NgbModal) {
-    this.products = [
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-      { name: 'Pão de Queijo', price: 5 } as Product,
-    ];
+  products$: Observable<Product[]>;
+  constructor(
+    private modalService: NgbModal,
+    private productService: ProductService
+  ) {}
+
+  ngOnInit() {
+    this.getProducts();
   }
 
-  ngOnInit(): void {}
+  getProducts() {
+    this.products$ = this.productService.getAll();
+  }
 
-  openProductDetailsModal() {
-    this.modalService.open(ProductDetailsComponent, {
+  openProductDetailsModal(product: Product) {
+    const modalRef = this.modalService.open(ProductDetailsComponent, {
       centered: true,
     });
+
+    modalRef.componentInstance.product = product;
   }
 }
