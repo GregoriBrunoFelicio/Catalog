@@ -44,7 +44,10 @@ namespace Catalog.API.Services
 
         public async Task<IResult> Update(Product product)
         {
-            if (!await IsNameAvailable(product.Name))
+            var productFromDb = await _prodructRepository.Get(product.Id);
+
+
+            if (!await IsNameAvailable(product.Name) && (product.Name != productFromDb.Name))
                 return new Result("Nome do produto já está em uso", false);
 
             var category = await _categoryRepository.Get(product.CategoryId);

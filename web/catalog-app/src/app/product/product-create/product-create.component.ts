@@ -26,8 +26,8 @@ export class ProductCreateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCategories();
     this.createForm();
+    this.getCategories();
   }
 
   createForm() {
@@ -71,7 +71,6 @@ export class ProductCreateComponent implements OnInit {
     this.productService.update(product).subscribe(
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
-        this.form.reset();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);

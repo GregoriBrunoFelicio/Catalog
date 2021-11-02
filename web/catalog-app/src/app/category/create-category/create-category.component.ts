@@ -66,7 +66,6 @@ export class CreateCategoryComponent implements OnInit {
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.getCategories();
-        this.form.reset();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);

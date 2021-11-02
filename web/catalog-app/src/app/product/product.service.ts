@@ -25,6 +25,6 @@ export class ProductService {
   }
 
   delete(id: string) {
-    return this.httpClient.delete(`${this.url}/Category/${id}`);
+    return this.httpClient.delete(`${this.url}/Product/${id}`);
   }
 }

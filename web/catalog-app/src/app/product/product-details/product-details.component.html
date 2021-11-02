@@ -11,7 +11,7 @@
             <img class="card-img-top image-size" src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kfXryEgJ/200/200/original?country=br" alt="Card image cap">
         </div>
         <button class="btn btn-primary m-1" (click)="openEditProductModal()">Editar</button>
-        <button class="btn btn-danger m-1">Excluir</button>
+        <button class="btn btn-danger m-1" (click)="deleteProduct(product.id)">Excluir</button>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
