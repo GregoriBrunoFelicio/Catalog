@@ -6,10 +6,10 @@
         </button>
     </div>
     <div class="modal-body">
-        <form>
+        <form [formGroup]="form">
             <div class="form-group">
                 <label>Nome</label>
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="name">
             </div>
         </form>
         <div class="col-12 overflow">
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="save()">Salvar</button>
+        <button type="button" class="btn btn-primary" (click)="save()" [disabled]="form.invalid">Salvar</button>
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
     </div>
 </div>

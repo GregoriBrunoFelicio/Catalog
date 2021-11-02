@@ -34,7 +34,7 @@ namespace Catalog.API.Controllers
 
             var result = await _productService.Add(product);
             return result.Success
-                ? Ok(result.Message)
+                ? Ok(result)
                 : BadRequest(result.Message);
         }
 
@@ -50,7 +50,7 @@ namespace Catalog.API.Controllers
 
             var result = await _productService.Update(product);
             return result.Success
-                ? Ok(result.Message)
+                ? Ok(result)
                 : BadRequest(result.Message);
         }
 

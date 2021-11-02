@@ -17,6 +17,6 @@ export class CategoryService {
   }
 
   add(category: Category) {
-    this.httpClient.post<Category>(`${this.url}/Category`, category);
+    return this.httpClient.post(`${this.url}/Category`, category);
   }
 }

@@ -32,7 +32,7 @@ namespace Catalog.API.Controllers
 
             var result = await _categoryService.Add(category);
             return result.Success
-                ? Ok(result.Message)
+                ? Ok(result)
                 : BadRequest(result.Message);
         }
 
@@ -47,7 +47,7 @@ namespace Catalog.API.Controllers
 
             var result = await _categoryService.Update(category);
             return result.Success
-                ? Ok(result.Message)
+                ? Ok(result)
                 : BadRequest(result.Message);
         }
 
