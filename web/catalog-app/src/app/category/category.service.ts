@@ -19,4 +19,12 @@ export class CategoryService {
   add(category: Category) {
     return this.httpClient.post(`${this.url}/Category`, category);
   }
+
+  update(category: Category) {
+    return this.httpClient.put(`${this.url}/Category`, category);
+  }
+
+  delete(id: string) {
+    return this.httpClient.delete(`${this.url}/Category/${id}`);
+  }
 }

@@ -79,7 +79,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             await _prodructRepository.Delete(id);
-            return Ok("Product deleted");
+            return Ok();
         }
     }
 }

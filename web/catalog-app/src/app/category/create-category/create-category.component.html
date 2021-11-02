@@ -20,8 +20,8 @@
                             {{category.name}}
                         </div>
                         <div class="col-6 text-right">
-                            <button class="btn btn-sm btn-primary">Editar</button>
-                            <button class="btn btn-sm btn-danger ml-1">Excluir</button>
+                            <button class="btn btn-sm btn-primary" (click)="edit(category)">Editar</button>
+                            <button class="btn btn-sm btn-danger ml-1" (click)="delete(category.id)">Excluir</button>
                         </div>
                     </div>
                 </li>

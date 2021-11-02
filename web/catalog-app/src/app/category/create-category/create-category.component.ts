@@ -31,22 +31,58 @@ export class CreateCategoryComponent implements OnInit {
 
   createForm() {
     this.form = this.formBuilder.group({
+      id: [''],
       name: ['', [Validators.required, Validators.maxLength(30)]],
     });
   }
 
   save() {
     if (this.form.invalid) return;
-
     const category = this.form.value;
+    console.log(category);
+    if (!category.id) {
+      this.add(category);
+    } else {
+      this.update(category);
+    }
+  }
 
+  add(category: Category) {
     this.categoryService.add(category).subscribe(
       (result: any) => {
-        console.log(result);
+        this.getCategories();
+        this.form.reset();
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  update(category: Category) {
+    this.categoryService.update(category).subscribe(
+      (result: any) => {
+        this.getCategories();
+        this.form.reset();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  delete(id: string) {
+    this.categoryService.delete(id).subscribe(
+      () => {
+        this.getCategories();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  edit(category: Category) {
+    this.form.patchValue(category);
   }
 }
