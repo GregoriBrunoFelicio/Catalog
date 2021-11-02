@@ -46,7 +46,8 @@ namespace Catalog.API.Controllers
             {
                 Id = input.Id,
                 Name = input.Name,
-                Price = input.Price
+                Price = input.Price,
+                CategoryId = input.CategoryId
             };
 
             var result = await _productService.Update(product);

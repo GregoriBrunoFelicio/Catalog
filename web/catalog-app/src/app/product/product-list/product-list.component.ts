@@ -25,6 +25,8 @@ export class ProductListComponent implements OnInit {
     this.products$ = this.productService.getAll();
   }
 
+  updateProductList() {}
+
   openProductDetailsModal(product: Product) {
     const modalRef = this.modalService.open(ProductDetailsComponent, {
       centered: true,

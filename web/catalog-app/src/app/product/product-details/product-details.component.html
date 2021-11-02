@@ -10,7 +10,7 @@
             <h4>{{product.name}} - {{product.price | currency : 'R$'}}</h4>
             <img class="card-img-top image-size" src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kfXryEgJ/200/200/original?country=br" alt="Card image cap">
         </div>
-        <button class="btn btn-primary m-1">Editar</button>
+        <button class="btn btn-primary m-1" (click)="openEditProductModal()">Editar</button>
         <button class="btn btn-danger m-1">Excluir</button>
     </div>
     <div class="modal-footer">

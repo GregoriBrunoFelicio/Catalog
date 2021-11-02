@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '../product';
+import { ProductCreateComponent } from '../product-create/product-create.component';
 
 @Component({
   selector: 'app-product-details',
@@ -10,7 +11,16 @@ import { Product } from '../product';
 export class ProductDetailsComponent implements OnInit {
   product: Product;
 
-  constructor(public modal: NgbActiveModal) {}
+  constructor(public modal: NgbActiveModal, private modalService: NgbModal) {}
 
   ngOnInit() {}
+
+  openEditProductModal() {
+    this.modal.close();
+    const modalRef = this.modalService.open(ProductCreateComponent, {
+      centered: true,
+    });
+
+    modalRef.componentInstance.edit(this.product);
+  }
 }
