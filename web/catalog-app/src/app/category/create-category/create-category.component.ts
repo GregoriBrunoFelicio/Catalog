@@ -51,14 +51,12 @@ export class CreateCategoryComponent implements OnInit {
   add(category: Category) {
     this.categoryService.add(category).subscribe(
       (result: any) => {
-        this.messageService.showSuccessMessage('Criou');
+        this.messageService.showSuccessMessage(result.message);
         this.getCategories();
         this.form.reset();
-        console.log('chamou');
       },
-      (error) => {
-        this.messageService.showErrorMessage('Error');
-        console.log('ERRRO');
+      (errorResponse) => {
+        this.messageService.showMessageInfo(errorResponse.error);
       }
     );
   }
@@ -66,11 +64,12 @@ export class CreateCategoryComponent implements OnInit {
   update(category: Category) {
     this.categoryService.update(category).subscribe(
       (result: any) => {
+        this.messageService.showSuccessMessage(result.message);
         this.getCategories();
         this.form.reset();
       },
-      (error) => {
-        console.log('ERRRO');
+      (errorResponse) => {
+        this.messageService.showMessageInfo(errorResponse.error);
       }
     );
   }
@@ -79,9 +78,10 @@ export class CreateCategoryComponent implements OnInit {
     this.categoryService.delete(id).subscribe(
       () => {
         this.getCategories();
+        this.messageService.showSuccessMessage('Categoria excluida');
       },
-      (error) => {
-        console.log(error);
+      (errorResponse) => {
+        this.messageService.showMessageInfo(errorResponse.error);
       }
     );
   }
