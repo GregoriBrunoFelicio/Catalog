@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { Category } from '../category';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-create-category',
@@ -7,9 +10,20 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./create-category.component.css'],
 })
 export class CreateCategoryComponent implements OnInit {
-  constructor(public modal: NgbActiveModal) {}
+  categories$: Observable<Category[]>;
 
-  ngOnInit(): void {}
+  constructor(
+    public modal: NgbActiveModal,
+    private categoryService: CategoryService
+  ) {}
+
+  ngOnInit() {
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.categories$ = this.categories$ = this.categoryService.getAll();
+  }
 
   save() {
     this.modal.close();

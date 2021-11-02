@@ -15,4 +15,8 @@ export class CategoryService {
   getAll(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(`${this.url}/Category`);
   }
+
+  add(category: Category) {
+    this.httpClient.post<Category>(`${this.url}/Category`, category);
+  }
 }
