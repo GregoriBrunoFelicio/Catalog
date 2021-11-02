@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'src/app/shared/message.service';
+import { SharedService } from 'src/app/shared/shared.service';
 import { Product } from '../product';
 import { ProductCreateComponent } from '../product-create/product-create.component';
 import { ProductService } from '../product.service';
@@ -17,7 +18,8 @@ export class ProductDetailsComponent implements OnInit {
     public modal: NgbActiveModal,
     private modalService: NgbModal,
     private productService: ProductService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit() {}
@@ -36,6 +38,7 @@ export class ProductDetailsComponent implements OnInit {
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.modal.close();
+        this.sharedService.sendMessage();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);

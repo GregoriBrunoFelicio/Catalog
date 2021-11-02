@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Category } from 'src/app/category/category';
 import { CategoryService } from 'src/app/category/category.service';
 import { MessageService } from 'src/app/shared/message.service';
+import { SharedService } from 'src/app/shared/shared.service';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -22,7 +23,8 @@ export class ProductCreateComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit() {
@@ -60,6 +62,7 @@ export class ProductCreateComponent implements OnInit {
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.form.reset();
+        this.sharedService.sendMessage();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);
@@ -71,6 +74,7 @@ export class ProductCreateComponent implements OnInit {
     this.productService.update(product).subscribe(
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
+        this.sharedService.sendMessage();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);
