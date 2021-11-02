@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/product/product';
@@ -11,7 +11,7 @@ import { ProductService } from '../product.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  products$: Observable<Product[]>;
+  @Input() products$: Observable<Product[]>;
   constructor(
     private modalService: NgbModal,
     private productService: ProductService

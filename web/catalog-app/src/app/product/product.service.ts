@@ -16,6 +16,12 @@ export class ProductService {
     return this.httpClient.get<Product[]>(`${this.url}/Product`);
   }
 
+  getByCategory(categoryId: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(
+      `${this.url}/Product/ByCategory/${categoryId}`
+    );
+  }
+
   add(product: Product) {
     return this.httpClient.post(`${this.url}/Product`, product);
   }
