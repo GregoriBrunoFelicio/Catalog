@@ -22,21 +22,21 @@ namespace Catalog.API.Services
         public async Task<IResult> Add(Category category)
         {
             if (!await IsNameAvailable(category.Name))
-                return new Result("The category name is already in use", false);
+                return new Result("Nome da categoria já está em uso", false);
 
             await _categoryRepository.Add(category);
 
-            return new Result("Category created", true);
+            return new Result("Categoria criada com sucesso", true);
         }
 
         public async Task<IResult> Update(Category category)
         {
             if (!await IsNameAvailable(category.Name))
-                return new Result("The category name is already in use", false);
+                return new Result("Nome da categoria já está em uso", false);
 
             await _categoryRepository.Update(category);
 
-            return new Result("Category updated", true);
+            return new Result("Categoria atualizada com sucesso", true);
         }
 
         private async Task<bool> IsNameAvailable(string categoryName) =>

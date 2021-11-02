@@ -51,7 +51,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("Category created", true);
+            var expectedResult = new Result("Categoria criada com sucesso", true);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
@@ -76,7 +76,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("The category name is already in use", false);
+            var expectedResult = new Result("Nome da categoria já está em uso", false);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
@@ -108,7 +108,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("Category updated", true);
+            var expectedResult = new Result("Categoria atualizada com sucesso", true);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
@@ -133,7 +133,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("The category name is already in use", false);
+            var expectedResult = new Result("Nome da categoria já está em uso", false);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }

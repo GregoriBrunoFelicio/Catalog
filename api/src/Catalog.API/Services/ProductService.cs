@@ -28,33 +28,33 @@ namespace Catalog.API.Services
         public async Task<IResult> Add(Product product)
         {
             if (!await IsNameAvailable(product.Name))
-                return new Result("The product name is already in use", false);
+                return new Result("Nome do produto já está em uso", false);
 
             var category = await _categoryRepository.Get(product.CategoryId);
 
             if (category is null)
-                return new Result("Category not found", false);
+                return new Result("Categoria informada não foi encontrada", false);
 
             product.Category = category;
 
             await _prodructRepository.Add(product);
 
-            return new Result("Product created", true);
+            return new Result("Produto criado com sucesso", true);
         }
 
         public async Task<IResult> Update(Product product)
         {
             if (!await IsNameAvailable(product.Name))
-                return new Result("The product name is already in use", false);
+                return new Result("Nome do produto já está em uso", false);
 
             var category = await _categoryRepository.Get(product.CategoryId);
 
             if (category is null)
-                return new Result("Category not found", false);
+                return new Result("Categoria informada não foi encontrada", false);
 
             await _prodructRepository.Update(product);
 
-            return new Result("Product updated", true);
+            return new Result("Produto atualizado com sucesso", true);
         }
 
         private async Task<bool> IsNameAvailable(string categoryName) =>

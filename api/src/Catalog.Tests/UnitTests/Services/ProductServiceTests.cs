@@ -53,7 +53,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("Product created", true);
+            var expectedResult = new Result("Produto criado com sucesso", true);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
@@ -78,7 +78,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("The product name is already in use", false);
+            var expectedResult = new Result("Nome do produto já está em uso", false);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
@@ -103,7 +103,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("Category not found", false);
+            var expectedResult = new Result("Categoria informada não foi encontrada", false);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
@@ -136,7 +136,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("Product updated", true);
+            var expectedResult = new Result("Produto atualizado com sucesso", true);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
@@ -161,7 +161,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("The product name is already in use", false);
+            var expectedResult = new Result("Nome do produto já está em uso", false);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
@@ -186,7 +186,7 @@ namespace Catalog.Tests.UnitTests.Services
         [Test]
         public void Should_Return_The_Expected_Result()
         {
-            var expectedResult = new Result("Category not found", false);
+            var expectedResult = new Result("Categoria informada não foi encontrada", false);
             result.Should().BeEquivalentTo(expectedResult);
         }
     }

@@ -2,6 +2,7 @@
 using Catalog.API.Inputs;
 using Catalog.API.Models;
 using Catalog.API.Services;
+using Catalog.API.Services.Results;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -69,7 +70,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             await _categoryRepository.Delete(id);
-            return Ok();
+            return Ok(new Result("Categoria removida com sucesso", true));
         }
     }
 }
