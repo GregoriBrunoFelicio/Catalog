@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { MessageService } from 'src/app/shared/message.service';
 import { Category } from '../category';
 import { CategoryService } from '../category.service';
 
@@ -17,7 +18,8 @@ export class CreateCategoryComponent implements OnInit {
   constructor(
     public modal: NgbActiveModal,
     private categoryService: CategoryService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -37,9 +39,8 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   save() {
-    if (this.form.invalid) return;
+    if (this.form.invalid || this.form.pristine) return;
     const category = this.form.value;
-    console.log(category);
     if (!category.id) {
       this.add(category);
     } else {
@@ -50,11 +51,14 @@ export class CreateCategoryComponent implements OnInit {
   add(category: Category) {
     this.categoryService.add(category).subscribe(
       (result: any) => {
+        this.messageService.showSuccessMessage('Criou');
         this.getCategories();
         this.form.reset();
+        console.log('chamou');
       },
       (error) => {
-        console.log(error);
+        this.messageService.showErrorMessage('Error');
+        console.log('ERRRO');
       }
     );
   }
@@ -66,7 +70,7 @@ export class CreateCategoryComponent implements OnInit {
         this.form.reset();
       },
       (error) => {
-        console.log(error);
+        console.log('ERRRO');
       }
     );
   }
