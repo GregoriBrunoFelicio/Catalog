@@ -2,7 +2,7 @@
 Catalog api using .Net 5 and mongoDb
 
 # Como executar o projeto
-Necessario ter SNK .NET 5 e Nodejs(angular cli).
+Necessario ter SDK .NET 5 e Nodejs(angular cli).
 
 1 -> Dentro do diretorio do projeto de api executar o comando dotnet run ou executar a aplicação diretamente pelo visual studio
 <br>
