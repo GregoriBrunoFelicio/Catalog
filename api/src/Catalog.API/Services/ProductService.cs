@@ -1,4 +1,5 @@
 ﻿using Catalog.API.Data;
+using Catalog.API.Inputs;
 using Catalog.API.Models;
 using Catalog.API.Services.Results;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Catalog.API.Services
 
     public interface IProductService
     {
-        Task<IResult> Add(Product product);
-        Task<IResult> Update(Product product);
+        Task<IResult> Add(CreateProductInput product);
+        Task<IResult> Update(UpdateProductInput product);
     }
 
     public class ProductService : IProductService
@@ -25,8 +26,16 @@ namespace Catalog.API.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<IResult> Add(Product product)
+        public async Task<IResult> Add(CreateProductInput input)
         {
+            var product = new Product
+            {
+                Id = input.Id,
+                Name = input.Name,
+                Price = input.Price,
+                CategoryId = input.CategoryId
+            };
+
             if (!await IsNameAvailable(product.Name))
                 return new Result("Nome do produto já está em uso", false);
 
@@ -42,10 +51,17 @@ namespace Catalog.API.Services
             return new Result("Produto criado com sucesso", true);
         }
 
-        public async Task<IResult> Update(Product product)
+        public async Task<IResult> Update(UpdateProductInput input)
         {
-            var productFromDb = await _prodructRepository.Get(product.Id);
+            var product = new Product
+            {
+                Id = input.Id,
+                Name = input.Name,
+                Price = input.Price,
+                CategoryId = input.CategoryId
+            };
 
+            var productFromDb = await _prodructRepository.Get(product.Id);
 
             if (!await IsNameAvailable(product.Name) && (product.Name != productFromDb.Name))
                 return new Result("Nome do produto já está em uso", false);

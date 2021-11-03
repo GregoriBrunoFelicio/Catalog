@@ -1,6 +1,5 @@
 ﻿using Catalog.API.Data;
 using Catalog.API.Inputs;
-using Catalog.API.Models;
 using Catalog.API.Services;
 using Catalog.API.Services.Results;
 using Microsoft.AspNetCore.Mvc;
@@ -25,13 +24,7 @@ namespace Catalog.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCategoryInput input)
         {
-            var category = new Category
-            {
-                Id = input.Id,
-                Name = input.Name
-            };
-
-            var result = await _categoryService.Add(category);
+            var result = await _categoryService.Add(input);
             return result.Success
                 ? Ok(result)
                 : BadRequest(result.Message);
@@ -40,13 +33,7 @@ namespace Catalog.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCategoryInput input)
         {
-            var category = new Category
-            {
-                Id = input.Id,
-                Name = input.Name
-            };
-
-            var result = await _categoryService.Update(category);
+            var result = await _categoryService.Update(input);
             return result.Success
                 ? Ok(result)
                 : BadRequest(result.Message);

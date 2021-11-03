@@ -1,4 +1,5 @@
 ﻿using Catalog.API.Data;
+using Catalog.API.Inputs;
 using Catalog.API.Models;
 using Catalog.API.Services.Results;
 using System.Linq;
@@ -8,8 +9,8 @@ namespace Catalog.API.Services
 {
     public interface ICategoryService
     {
-        Task<IResult> Add(Category category);
-        Task<IResult> Update(Category category);
+        Task<IResult> Add(CreateCategoryInput input);
+        Task<IResult> Update(UpdateCategoryInput input);
     }
 
     public class CategoryService : ICategoryService
@@ -19,8 +20,14 @@ namespace Catalog.API.Services
         public CategoryService(ICategoryRepository categoryRepository) =>
             _categoryRepository = categoryRepository;
 
-        public async Task<IResult> Add(Category category)
+        public async Task<IResult> Add(CreateCategoryInput input)
         {
+            var category = new Category
+            {
+                Id = input.Id,
+                Name = input.Name
+            };
+
             if (!await IsNameAvailable(category.Name))
                 return new Result("Nome da categoria já está em uso", false);
 
@@ -29,8 +36,14 @@ namespace Catalog.API.Services
             return new Result("Categoria criada com sucesso", true);
         }
 
-        public async Task<IResult> Update(Category category)
+        public async Task<IResult> Update(UpdateCategoryInput input)
         {
+            var category = new Category
+            {
+                Id = input.Id,
+                Name = input.Name
+            };
+
             if (!await IsNameAvailable(category.Name))
                 return new Result("Nome da categoria já está em uso", false);
 

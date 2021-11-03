@@ -1,5 +1,6 @@
 ﻿using AutoBogus;
 using Catalog.API.Data;
+using Catalog.API.Inputs;
 using Catalog.API.Models;
 using Catalog.API.Services;
 using Catalog.API.Services.Results;
@@ -16,6 +17,8 @@ namespace Catalog.Tests.UnitTests.Services
     public abstract class ProductServiceTests
     {
         protected AutoFaker<Product> ProductFaker = new();
+        protected AutoFaker<CreateProductInput> CreateProductFaker = new();
+        protected AutoFaker<UpdateProductInput> UpdateProductFaker = new();
         protected Mock<IProductRepository> ProductRepositoryMock = new();
         protected Mock<ICategoryRepository> CategoryRepositoryMock = new();
         protected IProductService ProductService;
@@ -32,7 +35,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var product = ProductFaker.Generate();
+            var product = CreateProductFaker.Generate();
 
             ProductRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Product, bool>>>())).ReturnsAsync(() => new List<Product>());
@@ -65,7 +68,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var product = ProductFaker.Generate();
+            var product = CreateProductFaker.Generate();
             var products = ProductFaker.Generate(2);
 
             ProductRepositoryMock.Setup(x => x.Get(
@@ -90,7 +93,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var product = ProductFaker.Generate();
+            var product = CreateProductFaker.Generate();
 
             ProductRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Product, bool>>>()))
@@ -115,7 +118,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var product = ProductFaker.Generate();
+            var product = UpdateProductFaker.Generate();
 
             ProductRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Product, bool>>>())).ReturnsAsync(() => new List<Product>());
@@ -148,12 +151,15 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var product = ProductFaker.Generate();
+            var product = UpdateProductFaker.Generate();
             var products = ProductFaker.Generate(2);
 
             ProductRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Product, bool>>>()))
                 .ReturnsAsync(() => products);
+
+            ProductRepositoryMock.Setup(x => x.Get(It.IsAny<Guid>()))
+                .ReturnsAsync(() => new Product { Name = $"{product.Name}-test" });
 
             result = await ProductService.Update(product);
         }
@@ -173,7 +179,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var product = ProductFaker.Generate();
+            var product = UpdateProductFaker.Generate();
 
             ProductRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Product, bool>>>()))
@@ -190,5 +196,4 @@ namespace Catalog.Tests.UnitTests.Services
             result.Should().BeEquivalentTo(expectedResult);
         }
     }
-
 }

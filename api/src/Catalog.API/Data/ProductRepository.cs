@@ -9,7 +9,6 @@ namespace Catalog.API.Data
     public interface IProductRepository : IRepository<Product>
     {
         Task<IEnumerable> GetByCategory(Guid categoryId);
-        Task<IEnumerable> GetByName(string name);
     }
 
     public class ProductRepository : Repository<Product>, IProductRepository
@@ -23,8 +22,5 @@ namespace Catalog.API.Data
             var filter = Builders<Product>.Filter.Eq(x => x.CategoryId, categoryId);
             return await Collection.Find(filter).ToListAsync();
         }
-
-        public async Task<IEnumerable> GetByName(string name) =>
-            await Collection.Find(filter => filter.Name.ToUpperInvariant().Contains(name)).ToListAsync();
     }
 }

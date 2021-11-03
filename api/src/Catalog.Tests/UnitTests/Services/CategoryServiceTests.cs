@@ -1,5 +1,6 @@
 ﻿using AutoBogus;
 using Catalog.API.Data;
+using Catalog.API.Inputs;
 using Catalog.API.Models;
 using Catalog.API.Services;
 using Catalog.API.Services.Results;
@@ -16,6 +17,8 @@ namespace Catalog.Tests.UnitTests.Services
     public abstract class CategoryServiceTests
     {
         protected AutoFaker<Category> CategoryFaker = new();
+        protected AutoFaker<CreateCategoryInput> CreateCategoryFaker = new();
+        protected AutoFaker<UpdateCategoryInput> UpdateCategoryFaker = new();
         protected Mock<ICategoryRepository> CategoryRepositoryMock = new();
         protected ICategoryService CategoryService;
 
@@ -31,7 +34,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var category = CategoryFaker.Generate();
+            var category = CreateCategoryFaker.Generate();
 
             CategoryRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Category, bool>>>())).ReturnsAsync(() => new List<Category>());
@@ -63,7 +66,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var category = CategoryFaker.Generate();
+            var category = CreateCategoryFaker.Generate();
             var categories = CategoryFaker.Generate(2);
 
             CategoryRepositoryMock.Setup(x => x.Get(
@@ -88,7 +91,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var category = CategoryFaker.Generate();
+            var category = UpdateCategoryFaker.Generate();
 
             CategoryRepositoryMock.Setup(x => x.Get(
                 It.IsAny<Expression<Func<Category, bool>>>())).ReturnsAsync(() => new List<Category>());
@@ -120,7 +123,7 @@ namespace Catalog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var category = CategoryFaker.Generate();
+            var category = UpdateCategoryFaker.Generate();
             var categories = CategoryFaker.Generate(2);
 
             CategoryRepositoryMock.Setup(x => x.Get(
