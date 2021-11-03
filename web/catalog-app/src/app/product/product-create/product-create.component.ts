@@ -75,6 +75,7 @@ export class ProductCreateComponent implements OnInit {
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.sharedService.sendMessage();
+        this.modal.close();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);

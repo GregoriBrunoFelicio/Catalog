@@ -70,6 +70,7 @@ export class CreateCategoryComponent implements OnInit {
         this.messageService.showSuccessMessage(result.message);
         this.getCategories();
         this.sharedService.sendMessage();
+        this.modal.close();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);
