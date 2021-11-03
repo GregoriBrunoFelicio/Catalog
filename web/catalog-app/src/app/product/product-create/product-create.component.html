@@ -26,7 +26,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="form.invalid || this.form.pristine">Salvar</button>
+        <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="disableSaveButton()">Salvar</button>
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
     </div>
 </div>

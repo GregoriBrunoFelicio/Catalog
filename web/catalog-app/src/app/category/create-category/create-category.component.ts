@@ -15,6 +15,7 @@ import { CategoryService } from '../category.service';
 export class CreateCategoryComponent implements OnInit {
   categories$: Observable<Category[]>;
   form: FormGroup;
+  isSaving = false;
 
   constructor(
     public modal: NgbActiveModal,
@@ -51,41 +52,50 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   add(category: Category) {
+    this.isSaving = true;
     this.categoryService.add(category).subscribe(
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.getCategories();
         this.form.reset();
         this.sharedService.sendMessage();
+        this.isSaving = false;
       },
       (errorResponse) => {
+        this.isSaving = false;
         this.messageService.showMessageInfo(errorResponse.error);
       }
     );
   }
 
   update(category: Category) {
+    this.isSaving = true;
     this.categoryService.update(category).subscribe(
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.getCategories();
         this.sharedService.sendMessage();
         this.modal.close();
+        this.isSaving = false;
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);
+        this.isSaving = false;
       }
     );
   }
 
   delete(id: string) {
+    this.isSaving = true;
     this.categoryService.delete(id).subscribe(
       (result: any) => {
         this.getCategories();
         this.messageService.showSuccessMessage(result.message);
         this.sharedService.sendMessage();
+        this.isSaving = false;
       },
       (errorResponse) => {
+        this.isSaving = false;
         this.messageService.showMessageInfo(errorResponse.error);
       }
     );
@@ -93,5 +103,9 @@ export class CreateCategoryComponent implements OnInit {
 
   edit(category: Category) {
     this.form.patchValue(category);
+  }
+
+  disableSaveButton() {
+    return this.form.invalid || this.form.pristine || this.isSaving;
   }
 }

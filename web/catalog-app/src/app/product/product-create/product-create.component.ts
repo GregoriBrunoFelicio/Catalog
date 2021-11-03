@@ -17,6 +17,7 @@ import { ProductService } from '../product.service';
 export class ProductCreateComponent implements OnInit {
   form: FormGroup;
   categories$: Observable<Category[]>;
+  isSaving = false;
 
   constructor(
     public modal: NgbActiveModal,
@@ -58,26 +59,32 @@ export class ProductCreateComponent implements OnInit {
   }
 
   add(product: Product) {
+    this.isSaving = true;
     this.productService.add(product).subscribe(
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.form.reset();
         this.sharedService.sendMessage();
+        this.isSaving = false;
       },
       (errorResponse) => {
+        this.isSaving = false;
         this.messageService.showMessageInfo(errorResponse.error);
       }
     );
   }
 
   update(product: Product) {
+    this.isSaving = true;
     this.productService.update(product).subscribe(
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.sharedService.sendMessage();
         this.modal.close();
+        this.isSaving = false;
       },
       (errorResponse) => {
+        this.isSaving = false;
         this.messageService.showMessageInfo(errorResponse.error);
       }
     );
@@ -87,5 +94,9 @@ export class ProductCreateComponent implements OnInit {
     setTimeout(() => {
       this.form.patchValue(product);
     }, 1);
+  }
+
+  disableSaveButton() {
+    return this.form.invalid || this.form.pristine || this.isSaving;
   }
 }

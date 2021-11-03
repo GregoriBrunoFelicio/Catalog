@@ -13,6 +13,7 @@ import { ProductService } from '../product.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product;
+  isDeleting = false;
 
   constructor(
     public modal: NgbActiveModal,
@@ -34,13 +35,16 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   deleteProduct(id: string) {
+    this.isDeleting = true;
     this.productService.delete(id).subscribe(
       (result: any) => {
+        this.isDeleting = false;
         this.messageService.showSuccessMessage(result.message);
         this.modal.close();
         this.sharedService.sendMessage();
       },
       (errorResponse) => {
+        this.isDeleting = false;
         this.messageService.showMessageInfo(errorResponse.error);
       }
     );
