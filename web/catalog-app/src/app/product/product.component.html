@@ -1,20 +1,22 @@
 <div class="col-12">
-    <div class="row">
-        <div class="col-3">
-            <label>Buscar por nome</label>
-            <input type="text" class="form-control" placeholder="Nome do produto" />
-        </div>
-        <div class="col-3">
-            <label>Buscar por categoria</label>
-            <select class="form-control" (change)="getByCategory($event.target.value)">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col">
+                <label>Buscar por nome</label>
+                <input type="text" class="form-control" placeholder="Nome do produto" formControlName="product" />
+            </div>
+            <div class="col">
+                <label>Buscar por categoria</label>
+                <select class="form-control" (change)="getByCategory($event.target.value)">
         <option [value]="''">Todas</option>
         <option *ngFor="let category of categories$ | async" [value]="category.id">{{ category.name}}</option>
       </select>
+            </div>
+            <div class="col-6 text-right mt-4">
+                <button (click)="openCreateProductModal()" type="button" class="btn btn-primary button-margin-top mr-2">Criar Produto</button>
+                <button (click)="openCreateCategoryModal()" type="button" class="btn btn-success button-margin-top">Criar Categoria</button>
+            </div>
         </div>
-        <div class="col-6 text-right mt-4">
-            <button (click)="openCreateProductModal()" type="button" class="btn btn-primary button-margin-top mr-2">Criar Produto</button>
-            <button (click)="openCreateCategoryModal()" type="button" class="btn btn-success button-margin-top">Criar Categoria</button>
-        </div>
-    </div>
+    </form>
 </div>
 <app-product-list [products$]="products$"></app-product-list>

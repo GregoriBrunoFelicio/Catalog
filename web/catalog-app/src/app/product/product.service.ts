@@ -22,6 +22,10 @@ export class ProductService {
     );
   }
 
+  getByName(name: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.url}/Product/ByName/${name}`);
+  }
+
   add(product: Product) {
     return this.httpClient.post(`${this.url}/Product`, product);
   }

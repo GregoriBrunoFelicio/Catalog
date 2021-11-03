@@ -77,6 +77,14 @@ namespace Catalog.API.Controllers
             return Ok(products);
         }
 
+        [HttpGet("ByName/{name}")]
+        public async Task<IActionResult> GetByName([FromRoute] string name)
+        {
+            var products = await _prodructRepository.GetByName(name);
+            return Ok(products);
+        }
+
+
         [HttpDelete("{id:Guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {

@@ -13,6 +13,7 @@ import { ProductService } from '../product.service';
 })
 export class ProductListComponent implements OnInit {
   @Input() products$: Observable<Product[]>;
+
   constructor(
     private modalService: NgbModal,
     private productService: ProductService,

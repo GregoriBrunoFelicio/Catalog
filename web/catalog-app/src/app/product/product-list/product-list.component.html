@@ -1,10 +1,10 @@
 <div class="col-12 mt-5 cards">
     <div *ngFor="let product of products$ | async" class="card text-center m-1" style="width: 13rem;">
-        <img class="card-img-top" src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kfXryEgJ/200/200/original?country=br" alt="Card image cap">
-        <div class="card-body">
+        <div class="card-body text-center">
+            <img class="card-img-top" src="https://yt3.ggpht.com/ytc/AKedOLQQ3PiZTm1bA2f7LxvcPbua1vG2YblCTOo_bPvt4w=s900-c-k-c0x00ffffff-no-rj" alt="Card image cap">
             <h5 class="card-title">{{product.name}}</h5>
             <p class="card-text">{{product.price | currency : 'R$'}}</p>
-            <a class="btn btn-primary" (click)="openProductDetailsModal(product)">Detalhes</a>
+            <a class="btn-sm btn-primary" (click)="openProductDetailsModal(product)">Detalhes</a>
         </div>
     </div>
 </div>
