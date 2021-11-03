@@ -2,15 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  startWith,
-  switchMap,
-} from 'rxjs/operators';
 import { Category } from '../category/category';
 import { CategoryService } from '../category/category.service';
 import { CreateCategoryComponent } from '../category/create-category/create-category.component';
+import { SharedService } from '../shared/shared.service';
 import { Product } from './product';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductService } from './product.service';
@@ -30,13 +25,14 @@ export class ProductComponent implements OnInit {
     private modalService: NgbModal,
     private categoryService: CategoryService,
     private productService: ProductService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit() {
-    this.getCategories();
     this.createForm();
-    this.getByName();
+    this.getCategories();
+    this.updateCategoryListListener();
   }
 
   createForm() {
@@ -47,6 +43,12 @@ export class ProductComponent implements OnInit {
 
   getCategories() {
     this.categories$ = this.categoryService.getAll();
+  }
+
+  updateCategoryListListener() {
+    this.sharedService.getMessage().subscribe((x) => {
+      this.getCategories();
+    });
   }
 
   openCreateProductModal() {
@@ -68,14 +70,5 @@ export class ProductComponent implements OnInit {
     } else {
       this.products$ = this.productService.getAll();
     }
-  }
-
-  getByName() {
-    this.form.get('product').valueChanges.pipe(
-      startWith(''),
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((text) => this.productService.getByName(text))
-    );
   }
 }

@@ -1,13 +1,9 @@
 <div class="col-12">
     <form [formGroup]="form">
         <div class="row">
-            <div class="col">
-                <label>Buscar por nome</label>
-                <input type="text" class="form-control" placeholder="Nome do produto" formControlName="product" />
-            </div>
-            <div class="col">
+            <div class="col-6">
                 <label>Buscar por categoria</label>
-                <select class="form-control" (change)="getByCategory($event.target.value)">
+                <select class="form-control col-6" (change)="getByCategory($event.target.value)">
         <option [value]="''">Todas</option>
         <option *ngFor="let category of categories$ | async" [value]="category.id">{{ category.name}}</option>
       </select>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { MessageService } from 'src/app/shared/message.service';
+import { SharedService } from 'src/app/shared/shared.service';
 import { Category } from '../category';
 import { CategoryService } from '../category.service';
 
@@ -19,7 +20,8 @@ export class CreateCategoryComponent implements OnInit {
     public modal: NgbActiveModal,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit() {
@@ -54,6 +56,7 @@ export class CreateCategoryComponent implements OnInit {
         this.messageService.showSuccessMessage(result.message);
         this.getCategories();
         this.form.reset();
+        this.sharedService.sendMessage();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);
@@ -66,6 +69,7 @@ export class CreateCategoryComponent implements OnInit {
       (result: any) => {
         this.messageService.showSuccessMessage(result.message);
         this.getCategories();
+        this.sharedService.sendMessage();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);
@@ -78,6 +82,7 @@ export class CreateCategoryComponent implements OnInit {
       (result: any) => {
         this.getCategories();
         this.messageService.showSuccessMessage(result.message);
+        this.sharedService.sendMessage();
       },
       (errorResponse) => {
         this.messageService.showMessageInfo(errorResponse.error);

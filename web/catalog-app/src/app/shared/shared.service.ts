@@ -5,13 +5,13 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
-  updateCategories = new Subject<boolean>();
+  updateState = new Subject<boolean>();
 
   sendMessage() {
-    this.updateCategories.next(true);
+    this.updateState.next(true);
   }
 
   getMessage() {
-    return this.updateCategories.asObservable();
+    return this.updateState.asObservable();
   }
 }
